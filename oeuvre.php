@@ -13,24 +13,24 @@ if (empty($oeuvre['id'])) {
 } else {
     $path = $pathImg . $oeuvre['image_url'];
 ?>
-    <article id="detail-oeuvre">
-        <div id="img-oeuvre">
-            <?php echo '<img src="' . $path . '" alt="' . $oeuvre['image_alt'] . '">'; ?>
-        </div>
-        <div id="contenu-oeuvre">
-            <h1>
-                <?php echo $oeuvre['titre']; ?>
-            </h1>
-            <p class="description">
-                <?php echo $oeuvre['artiste']; ?>
-            </p>
-            <p class="description-complete">
-                <?php echo $oeuvre['description']; ?>
-            </p>
-        </div>
-    </article>
+<article id="detail-oeuvre">
+    <div id="img-oeuvre">
+        <?php echo '<img src="' . $path . '" alt="' . $oeuvre['image_alt'] . '">'; ?>
+    </div>
+    <div id="contenu-oeuvre">
+        <h1>
+            <?php echo $oeuvre['titre']; ?>
+        </h1>
+        <p class="description">
+            <?php echo $oeuvre['artiste']; ?>
+        </p>
+        <p class="description-complete">
+            <?php echo $oeuvre['description']; ?>
+        </p>
+    </div>
+</article>
 
-    </main>
+</main>
 <?php
 }
 require_once('./includes/footer.php') ?>

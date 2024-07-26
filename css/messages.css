@@ -1,0 +1,15 @@
+.message {
+    width: 100%;
+    min-height: 50px;
+    text-align: center;
+}
+
+.message--success {
+    background-color: lightgreen;
+    color: black;
+}
+
+.message--error {
+    background-color: lightcoral;
+    color: black;
+}

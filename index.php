@@ -6,6 +6,9 @@
 
  <div id="liste-oeuvres">
      <?php
+        if (isset($_GET['message']) && $_GET['message'] === 'success') {
+            echo "<div class='message message--success'><p>Votre oeuvre a bien été ajoutée</p></div>";
+        }
         $stmt = $pdo->prepare(getAllOeuvres());
         $stmt->execute();
         $oeuvres = $stmt->fetchAll(PDO::FETCH_ASSOC);
