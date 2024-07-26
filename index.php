@@ -6,14 +6,7 @@
 
  <div id="liste-oeuvres">
      <?php
-        // require_once('./data/tableaux.php');
         $stmt = $pdo->prepare(getAllOeuvres());
-        // $stmt->bindValue('id', ':id');
-        // $stmt->bindValue('titre', ':titre');
-        // $stmt->bindValue('artiste', ':artiste');
-        // $stmt->bindValue('description', ':description');
-        // $stmt->bindValue('image_alt', ':image_alt');
-        // $stmt->bindValue('image_url', ':image_url');
         $stmt->execute();
         $oeuvres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
