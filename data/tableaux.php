@@ -1,5 +1,8 @@
 <?php
 
+require_once(__DIR__ . "/bdd.php");
+require_once(__DIR__ . "/requests.php");
+
 $pathImg = "img/";
 $oeuvres = [
     [
@@ -183,3 +186,13 @@ $oeuvres = [
 
     ]
 ];
+
+foreach ($oeuvres as $oeuvre) {
+    $stmt = $pdo->prepare(createOeuvre());
+    $stmt->bindValue(':titre', $oeuvre['nom de l\'oeuvre']);
+    $stmt->bindValue(':artiste', $oeuvre['nom de l\'artiste']);
+    $stmt->bindValue(':description', $oeuvre['description complete']);
+    $stmt->bindValue(':image_alt', $oeuvre['nom de l\'oeuvre']);
+    $stmt->bindValue(':image_url', $oeuvre['image_url']);
+    $stmt->execute();
+}

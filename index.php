@@ -1,35 +1,33 @@
-<!doctype html>
-<html lang="fr">
+ <?php
+    require_once(__DIR__ . "/includes/header.php");
+    require_once(__DIR__ . "/data/bdd.php");
+    require_once(__DIR__ . "/data/requests.php");
+    ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <title>The ArtBox</title>
-</head>
+ <div id="liste-oeuvres">
+     <?php
+        // require_once('./data/tableaux.php');
+        $stmt = $pdo->prepare(getAllOeuvres());
+        // $stmt->bindValue('id', ':id');
+        // $stmt->bindValue('titre', ':titre');
+        // $stmt->bindValue('artiste', ':artiste');
+        // $stmt->bindValue('description', ':description');
+        // $stmt->bindValue('image_alt', ':image_alt');
+        // $stmt->bindValue('image_url', ':image_url');
+        $stmt->execute();
+        $oeuvres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-<body>
-    <?php include_once("./includes/header.php") ?>
-
-    <main>
-        <div id="liste-oeuvres">
-            <?php
-            require_once('./data/tableaux.php');
-            foreach ($oeuvres as $oeuvre) {
-                $path = $pathImg . $oeuvre['image_url'];
-                echo '<article class="oeuvre">
+        foreach ($oeuvres as $oeuvre) {
+            $path = $pathImg . $oeuvre['image_url'];
+            echo '<article class="oeuvre">
                         <a href="oeuvre.php?id=' . $oeuvre['id'] . '">
                             <img src="' . $path . '" alt="' . $oeuvre['image_alt'] . '">
-                            <h2>' . $oeuvre['nom de l\'oeuvre'] . '<h2>
-                            <p class="description">' . $oeuvre["nom de l'artiste"] . "</p>
+                            <h2>' . $oeuvre['titre'] . '<h2>
+                            <p class="description">' . $oeuvre["artiste"] . "</p>
                         </a>
                     </article>";
-            }
-            ?>
-        </div>
-    </main>
-    <?php include_once('./includes/footer.php') ?>
-</body>
-
-</html>
+        }
+        ?>
+ </div>
+ </main>
+ <?php require_once('./includes/footer.php') ?>
