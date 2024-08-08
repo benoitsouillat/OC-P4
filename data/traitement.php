@@ -23,6 +23,7 @@ session_start();
 $_SESSION = [];
 if (!empty($messages)) {
     $_SESSION['messages'] = $messages;
+    $_SESSION['post'] = $_POST;
     header('Location: /ajouter.php');
 } else {
     try {

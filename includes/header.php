@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/menu.css">
     <link rel="stylesheet" href="./css/messages.css">
+    <link rel="stylesheet" href="./css/form.css">
     <title>The ArtBox</title>
 </head>
 
