@@ -10,6 +10,7 @@ textarea {
 }
 label {
     font-size: .95em;
+    margin-bottom: 3px;
 }
 input[type='submit']
 {
@@ -31,4 +32,5 @@ input[type='submit']:hover {
     display: flex;
     flex-direction: column;
     width: 45%;
+    margin: 5px 0;
 }

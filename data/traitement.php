@@ -4,7 +4,9 @@ require_once(__DIR__ . '/bdd.php');
 require_once(__DIR__ . '/requests.php');
 
 $messages = [];
-$urlFormat = "/https://^[A-z]";
+
+$urlFormat = "/^https:\/\/[a-zA-Z0-9._-]+$/";
+$extensionFormat = "/^.+\.(jpg|jpeg|png|webp|gif)$/";
 
 if (empty($_POST['titre'])) {
     array_push($messages, "Le titre de l'oeuvre doit être indiqué. <br> ");
@@ -15,9 +17,12 @@ if (empty($_POST['artiste'])) {
 if (strlen($_POST['description']) < 3) {
     array_push($messages, "La description ne peut pas être vide et doit contenir au moins 3 caractères. <br> ");
 }
-if (empty($_POST['image_url'] /* || !preg_match($urlFormat, $_POST['image_url']) */)) {
+if (empty($_POST['image_url']) || !preg_match($urlFormat, $_POST['image_url'])) {
     array_push($messages, "Veuillez renseigner le lien complet de l'image au format <strong>https://</strong>. <br> ");
+} elseif (!preg_match($extensionFormat, $_POST['image_url'])) {
+    array_push($messages, "Vous devez entrez une extension valide <strong>(jpg, jpeg, png, webp, gif)</strong> <br>");
 }
+
 
 session_start();
 $_SESSION = [];
