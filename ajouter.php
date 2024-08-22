@@ -11,7 +11,6 @@ if (!empty($_SESSION['messages'])) {
     echo "</div>";
 }
 if (empty($_SESSION['post'])) {
-    $_SESSION['post']['init'] = true;
     $_SESSION['post']['titre'] = '';
     $_SESSION['post']['artiste'] = '';
     $_SESSION['post']['image_url'] = '';

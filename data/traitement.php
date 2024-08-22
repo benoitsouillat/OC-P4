@@ -4,9 +4,8 @@ require_once(__DIR__ . '/bdd.php');
 require_once(__DIR__ . '/requests.php');
 
 $messages = [];
-
-$urlFormat = "/^https:\/\/[a-zA-Z0-9._-]+$/";
-$extensionFormat = "/^.+\.(jpg|jpeg|png|webp|gif)$/";
+$urlFormat = "/^https:\/\/[a-zA-Z0-9._-]+(\/[a-zA-Z0-9._-]*)*$/";
+// $extensionFormat = "/^.+\.(jpg|jpeg|png|webp|gif)$/";
 
 if (empty($_POST['titre'])) {
     array_push($messages, "Le titre de l'oeuvre doit être indiqué. <br> ");
@@ -19,10 +18,9 @@ if (strlen($_POST['description']) < 3) {
 }
 if (empty($_POST['image_url']) || !preg_match($urlFormat, $_POST['image_url'])) {
     array_push($messages, "Veuillez renseigner le lien complet de l'image au format <strong>https://</strong>. <br> ");
-} elseif (!preg_match($extensionFormat, $_POST['image_url'])) {
-    array_push($messages, "Vous devez entrez une extension valide <strong>(jpg, jpeg, png, webp, gif)</strong> <br>");
-}
-
+} /* elseif (!str_starts_with($_POST['image_url'], 'http') && !preg_match($extensionFormat, $_POST['image_url'])) {
+    array_push($messages, "Vous devez entrez une extension valide <strong>(jpg, jpeg, png, webp, gif)</strong> ou une URL d'image externe <br>");
+} */
 
 session_start();
 $_SESSION = [];
@@ -33,11 +31,11 @@ if (!empty($messages)) {
 } else {
     try {
         $stmt = $pdo->prepare(createOeuvre());
-        $stmt->bindValue(':titre', $_POST['titre']);
-        $stmt->bindValue(':artiste', $_POST['artiste']);
-        $stmt->bindValue(':description', $_POST['description']);
-        $stmt->bindValue(':image_alt', $_POST['titre']);
-        $stmt->bindValue(':image_url', $_POST['image_url']);
+        $stmt->bindValue(':titre', htmlspecialchars($_POST['titre']));
+        $stmt->bindValue(':artiste', htmlspecialchars($_POST['artiste']));
+        $stmt->bindValue(':description', htmlspecialchars($_POST['description']));
+        $stmt->bindValue(':image_alt', htmlspecialchars($_POST['titre']));
+        $stmt->bindValue(':image_url', htmlspecialchars($_POST['image_url']));
         $stmt->execute();
         header("Location: /index.php?message=success");
     } catch (PDOException $e) {

@@ -2,6 +2,7 @@
 require_once(__DIR__ . "/includes/header.php");
 require_once(__DIR__ . "/data/bdd.php");
 require_once(__DIR__ . "/data/requests.php");
+require_once(__DIR__ . "/data/functions.php");
 ?>
 
 <div id="liste-oeuvres">
@@ -14,7 +15,7 @@ require_once(__DIR__ . "/data/requests.php");
     $oeuvres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($oeuvres as $oeuvre) {
-        $path = $pathImg . $oeuvre['image_url'];
+        $path = set_path_url($oeuvre['image_url']);
         echo '<article class="oeuvre">
                         <a href="oeuvre.php?id=' . $oeuvre['id'] . '">
                             <img src="' . $path . '" alt="' . $oeuvre['image_alt'] . '">

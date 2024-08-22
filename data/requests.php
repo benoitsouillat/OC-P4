@@ -1,5 +1,4 @@
 <?php
-$pathImg = "img/";
 
 function getAllOeuvres()
 {
